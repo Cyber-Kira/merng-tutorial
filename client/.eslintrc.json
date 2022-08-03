@@ -1,0 +1,23 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["plugin:react/recommended", "airbnb", "prettier"],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": ["react"],
+	"rules": {
+		"react/prop-types": "off",
+		"react/function-component-definition": "off",
+		"arrow-body-style": "off",
+		"react/jsx-filename-extension": "off",
+		"import/no-named-as-default-member": "off",
+		"import/no-named-as-default": "off"
+	}
+}
