@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Image, Button, Icon, Label } from 'semantic-ui-react'
 import { AuthContext } from '../context/Auth'
+import DeleteButton from './DeleteButton'
 import LikeButton from './LikeButton'
 
 const PostCard = ({
@@ -38,16 +39,7 @@ const PostCard = ({
 						{commentCount}
 					</Label>
 				</Button>
-				{user && user.username === username && (
-					<Button
-						as='div'
-						color='red'
-						floated='right'
-						onClick={() => console.log('Delete post')}
-					>
-						<Icon name='trash' style={{ margin: 0 }} />
-					</Button>
-				)}
+				{user && user.username === username && <DeleteButton postId={id} />}
 			</Card.Content>
 		</Card>
 	)
