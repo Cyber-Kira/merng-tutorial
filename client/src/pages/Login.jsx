@@ -1,8 +1,9 @@
 import { useMutation, gql } from '@apollo/client'
 
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'semantic-ui-react'
+import { AuthContext } from '../context/Auth'
 import { useForm } from '../utils/hooks'
 
 const LOGIN_USER = gql`
@@ -18,8 +19,17 @@ const LOGIN_USER = gql`
 `
 
 const Login = () => {
+	const location = useLocation()
+	const context = useContext(AuthContext)
+
 	const navigate = useNavigate()
 	const [errors, setErrors] = useState({})
+
+	useEffect(() => {
+		if (context.user) {
+			navigate('/')
+		}
+	}, [location])
 
 	const initialState = {
 		username: '',
@@ -32,14 +42,12 @@ const Login = () => {
 	)
 
 	const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-		update(_, result) {
-			// eslint-disable-next-line no-console
-			console.log(result)
+		update(_, { data: { login: userData } }) {
+			context.login(userData)
 			setErrors({})
 			navigate('/', { replace: true })
 		},
 		onError(err) {
-			console.log(err.graphQLErrors[0].extensions.errors)
 			setErrors(err.graphQLErrors[0].extensions.errors)
 		},
 		variables: values,
