@@ -17,8 +17,11 @@ mongoose
 	.connect(process.env.MONGODB)
 	.then(() => {
 		console.log('MongoDB Connected')
-		return server.listen('5000')
+		return server.listen(process.env.PORT)
 	})
 	.then(res => {
 		console.log(`Server is running on ${res.url}`)
+	})
+	.catch(err => {
+		console.error(err)
 	})
