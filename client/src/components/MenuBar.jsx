@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
 const MenuBar = () => {
 	const location = useLocation()
-	const path = location.pathname === '/' ? 'home' : location.pathname.slice(1)
-	const [activeItem, setActiveItem] = useState(path)
+	const [activeItem, setActiveItem] = useState('')
+
+	useEffect(() => {
+		const path = location.pathname === '/' ? 'home' : location.pathname.slice(1)
+		setActiveItem(path)
+	}, [location])
 
 	const handleItemClick = (_, { name }) => setActiveItem(name)
 
