@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Label } from 'semantic-ui-react'
+import { Button, Icon, Label, Popup } from 'semantic-ui-react'
 
 const LIKE_POST_MUTATION = gql`
 	mutation likePost($postId: ID!) {
@@ -54,12 +54,18 @@ const LikeButton = ({ user, post: { id, likes, likeCount } }) => {
 	)
 
 	return (
-		<Button as='div' labelPosition='right' onClick={likePost}>
-			{likeButton}
-			<Label basic color='teal' pointing='left'>
-				{likeCount}
-			</Label>
-		</Button>
+		<Popup
+			inverted
+			content='Like a post'
+			trigger={
+				<Button as='div' labelPosition='right' onClick={likePost}>
+					{likeButton}
+					<Label basic color='teal' pointing='left'>
+						{likeCount}
+					</Label>
+				</Button>
+			}
+		/>
 	)
 }
 
