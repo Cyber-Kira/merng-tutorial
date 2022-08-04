@@ -7,7 +7,7 @@ import {
 } from '@apollo/client'
 import { setContext } from 'apollo-link-context'
 
-const uri = 'http://localhost:5000'
+const uri = 'https://merng-tutorial-server.herokuapp.com/'
 
 const authLink = setContext(() => {
 	const token = localStorage.getItem('jwtToken')
