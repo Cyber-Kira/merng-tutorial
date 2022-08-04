@@ -41,6 +41,7 @@ const Register = () => {
 		if (context.user) {
 			navigate('/')
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location])
 
 	const initialState = {
